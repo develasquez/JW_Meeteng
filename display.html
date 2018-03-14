@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link href="css/monomer.css" rel="stylesheet"/>
+    <link href="css/style.css" rel="stylesheet"/>
+  </head>
+  <body class="display">
+    <div class="flex-center-container">
+      <div class="row mainContent">
+        <h1 class="yearText centerItem">“Los que estén esperando en Jehová recobrarán el poder”
+        (Isaías 40:31).</h1>
+        <div class="videoContainer">
+          <video src="" id="video" autoplay controls></video>
+        </div>
+        <div class="audioContainer">
+          <audio src="" id="audio" autoplay controls></audio>
+        </div>
+        <div class="imageContainer">
+
+        </div>
+      </div>
+    </div>
+    <script>
+      window.$ = window.jQuery = require('jquery');
+      require('./js/display.js')
+      var electron = require("electron");
+    </script>
+  </body>
+</html>

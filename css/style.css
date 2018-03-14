@@ -1,0 +1,146 @@
+.caratula{
+    width: 100%;
+    margin-top: 5%;
+  }
+  .caratulaReproduciendo{
+    width: 48px;
+    height: 48px;
+  }
+  .hover-red{
+    color: black !important;
+  }
+
+  .hover-red:hover{
+    color: red !important;
+    -webkit-animation: hover .263s   ;
+    -moz-animation: hover .263s   ;
+    -o-animation: hover .263s   ;
+    animation: hover .263s   ;
+}
+
+.card_35{
+  min-width: 0px !important;
+};
+.listaImgX2{
+  width:100%;
+  height:50%;
+}
+.listaImgX4{
+  display:inline-block;
+  width:50%;
+  height:50%;
+}
+
+.mainContent{
+  display: flex;
+  justify-content: space-around;
+
+}
+
+.mainContent .list {
+  width: auto;
+}
+
+.content {
+  width: 100%;
+  max-width: 100%;
+}
+
+#media {
+  flex: 2;
+  height: 100%;
+}
+.weekTitle {
+  padding-left: 2em;
+  color: #333;
+}
+.mediaList {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  height: 100%;
+  padding: 2em;
+}
+#songs {
+  flex: 1;
+  min-height: 600px;
+  overflow-y: scroll; 
+}
+#songs.background_control {
+  background-color: #ece7e7;
+}
+
+#songs .test_box {
+  background-color: #ece7e7;
+}
+.thumb {
+  width: 150px;
+  height: 120px;
+  padding-bottom: 4em
+}
+
+.thumb .title {
+  font-size: 12px;
+}
+
+.thumb img {
+  width: 150px;
+  height: 90px;
+}
+
+/* DISPLAY CSS */
+html, body {
+    height: 100%;
+}
+body {
+    margin: 0;
+}
+
+.display {
+  background-color: #000;
+}
+
+.yearText {
+  color: #fff;
+  width: 50%;
+}
+
+.flex-center-container {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.row {
+    width: auto;
+}
+
+.centerItem {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.videoContainer {
+  display: none;
+}
+.videoContainer video {
+  width: 100%;
+  height: 100%;
+}
+.audioContainer {
+  display: none;
+}
+
+.audioContainer audio {
+  width: 100%;
+  height: 100%;
+}
+.imageContainer {
+  display: none;
+}

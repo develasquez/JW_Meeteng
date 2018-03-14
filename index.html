@@ -1,19 +1,121 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <meta charset='utf-8' />
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link href="css/monomer.css" rel="stylesheet"/>
+    <link href="css/style.css" rel="stylesheet"/>
+    <title>JW Meetings</title>
   </head>
   <body>
-    <h1>Hello World!</h1>
-    <!-- All of the Node.js APIs are available in this renderer process. -->
-    We are using Node.js <script>document.write(process.versions.node)</script>,
-    Chromium <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
-
+    <!--<nav class="leftMenu z-d1 background_control">
+      <ul class="list advanced ">
+        <a href="javascript:void(0)"  onClick="monomer.pageShow('#meetings')">
+          <li>
+            <div>
+              <div class="test_box fab z-d1">
+                <i class="icon-search color-black"></i>
+              </div>
+            </div>
+            <div>
+              <div>
+                <h3>Reuniones</h3>
+                <p>Archivos Multimedia</p>
+              </div>
+            </div>
+          </li>
+        </a>
+        <a href="javascript:void(0)"  onClick="monomer.pageShow('#config')">
+          <li>
+            <div>
+              <div class="test_box fab z-d1">
+                <i class="icon-crog color-black"></i>
+              </div>
+            </div>
+            <div>
+              <div>
+                <h3>Ajustes</h3>
+                <p>Administrar Configuración</p>
+              </div>
+            </div>
+          </li>
+        </a>
+        <a href="javascript:void(0)"  onClick="monomer.pageShow('#about')">
+          <li>
+            <div>
+              <div class="test_box fab z-d1">
+                <i class="icon-info color-black"></i>
+              </div>
+            </div>
+            <div>
+              <div>
+                <h3>Info</h3>
+                <p>Acerca de JW Meeting</p>
+              </div>
+            </div>
+          </li>
+        </a>
+      </ul>
+      
+    </nav>-->
+    <div class="modal-dialog fade card background_control z-d3 " id="popupWeeks">
+      <div class="header">
+        <h2 class="color-light-blue center">Semanas</h2>
+      </div>
+      <ul class="weeks list background_control divider">
+      </ul>
+    </div>
+    <div class="page" id="meetings">
+      <div class="header purple z-d1">
+        <button class="expand-LeftMenu button-left icon-bars icon-1x icon-white" arrows-alt>
+        </button>
+        <h3 class="color-white">JW Reuniones</h3>
+        <button class="expandWeeks button-right icon-calendar icon-1x icon-white">
+        </button>
+      </div>
+      <div class="content">
+        <div class="mainContent">
+          <div id="media">
+            <div class="tabBar">
+              <ul class="purple z-d1">
+                <li class="tab color-white hoy selected">
+                  <span class="onTablet onDesktop">VIDA Y MINISTERIO</span>
+                </li>
+                <li class="tab color-white Deportes">
+                  <span class="onTablet onDesktop">ESTUDIO DE LA ATALAYA</span>
+                </li>
+                <div class="selectedTab white">
+                </div>
+                <div class="tabElement selected">
+                  <div class="sports">
+                    <h3 class="weekTitle">
+                    </h3>
+                    <div class="mediaList">
+                      
+                    </div>
+                  </div>
+                </div>
+                <div class="tabElement">
+                  <div class="sports">
+                  </div>
+                </div>
+              </ul>
+            </div>
+          </div>
+          <ul id="songs" class="list advanced divider background_control">
+          </ul>
+        </div>
+      </div>
+    </div>
     <script>
-      // You can also require other files to run in this process
-      require('./renderer.js')
+    window.$ = window.jQuery = require('jquery');
+    require('./js/vendor/pointerevents.js');
+    require('./js/vendor/monomer.js');
+    require('./js/main.js')
+    var electron = require("electron");
     </script>
   </body>
 </html>

@@ -1,12 +1,12 @@
 {
-  "name": "electron-quick-start",
+  "name": "JW Meetings",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "",
   "keywords": [
     "Electron",
     "quick",
@@ -15,8 +15,16 @@
     "demo"
   ],
   "author": "GitHub",
-  "license": "CC0-1.0",
+  "license": "MIT",
   "devDependencies": {
-    "electron": "~1.8.2"
+    "electron": "~1.8.2",
+    "electron-packager": "^11.1.0"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "cheerio": "^1.0.0-rc.2",
+    "jquery": "^3.3.1",
+    "lodash": "^4.17.5",
+    "request": "^2.83.0"
   }
 }
