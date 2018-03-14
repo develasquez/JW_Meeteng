@@ -16,11 +16,49 @@ var songsCount = 151;
 var weekProgramUrl = "https://wol.jw.org/es/wol/dt/r4/lp-s/";
 var songsList = [];
 var Media = {
-	getWatchtower: function() {
-		Media.getCurrentWeek().then(function(thisWeek) {
-
+	getWatchtower: function(thisWeek) {
+		return new Promise(function(resolve, reject) {
+			var wUrl = `${baseUrl}${thisWeek.wUrl}`;
+			request(wUrl, function(err, xhr, bodyArticle) {
+				console.log("response");
+				try {
+					if (err) {
+						console.log("resolveMedia");
+						resolve({
+							url: "",
+							name: $(e).text() || "Media"
+						});
+						return;
+					}
+					$$ = cheerio.load(bodyArticle);
+					var sources = [];
+					$$("figure img").each(function(ind, el) {
+						const mediaLink = $$(el).attr("src") || $$(el).attr("href");
+						var url = mediaLink.indexOf("http") > -1 ? mediaLink : `${baseUrl}${mediaLink}`;
+						sources.push({
+							url: url,
+							name: thisWeek.wName,
+							type: "IMAGE",
+						});
+					});
+					$$("article .pubRefs a").each(function(ind, e) {
+						console.log("resolveMedia");
+						sources.push({
+							url: _.filter(songsList, function(s) {
+								return s.number == parseInt(($(e).text()).match(/[0-9]{1,3}/))
+							})[0].url,
+							image: "https://assetsnffrgf-a.akamaihd.net/assets/a/sjjm/univ/wpub/sjjm_univ_lg.jpg",
+							name: `Cántico ${($(e).text()).match(/[0-9]{1,3}/)}`,
+							type: "VIDEO"
+						});
+					})
+					resolve(sources);
+					return;
+				} catch (ex) {
+					consolelog(ex);
+				};
+			});
 		});
-
 		//leer Programa
 		//Leer Estudio 
 		//Leer Imagenes
@@ -36,7 +74,8 @@ var Media = {
 				var $ = cheerio.load(body);
 				resolve({
 					name: $("[class*='pub-mwb'] .docTitle").text(),
-					body: body
+					wUrl: $("[class*='pub-w'] .it").attr("href"),
+					wName: $("[class*='pub-w'] .it").text()
 				});
 
 			});
@@ -118,23 +157,23 @@ var Media = {
 					var $ = cheerio.load(body);
 					var urlMedia = [];
 					$(".su a:not(.b):not(.fn), .sw a:not(.b):not(.fn)").each(function(order, e) {
-						console.log("push - " +$(e).text() );
+						console.log("push - " + $(e).text());
 						urlMedia.push(new Promise(function(resolveMedia, reject) {
 							let mUrl;
 							try {
-							mUrl = $(e).attr("href").indexOf("http") > -1 ? $(e).attr("href") : `${baseUrl}${$(e).attr("href")}`;
+								mUrl = $(e).attr("href").indexOf("http") > -1 ? $(e).attr("href") : `${baseUrl}${$(e).attr("href")}`;
 
-							mUrl = mUrl.replace(apiFinder, apiMedi).replace("&lang=S", "");
-							var objUrl = getParams(mUrl);
-							if (objUrl.issue) {
+								mUrl = mUrl.replace(apiFinder, apiMedi).replace("&lang=S", "");
+								var objUrl = getParams(mUrl);
+								if (objUrl.issue) {
 
-								var type = ($(e).attr("data-audio") || "").length > 0 ? "AUDIO" : "VIDEO";
-								mUrl = apiMedi + "pub-mwbv_" + objUrl.issue + "_" + objUrl.track + "_" + type
-							}
-							}catch(ex){
+									var type = ($(e).attr("data-audio") || "").length > 0 ? "AUDIO" : "VIDEO";
+									mUrl = apiMedi + "pub-mwbv_" + objUrl.issue + "_" + objUrl.track + "_" + type
+								}
+							} catch (ex) {
 								console.log(ex);
 							}
-							console.log("request - " + $(e).text() );
+							console.log("request - " + $(e).text());
 							request(mUrl, function(err, xhr, bodyArticle) {
 								console.log("response");
 								try {
@@ -211,7 +250,7 @@ var Media = {
 					console.log(ex);
 				}
 				Promise.all(urlMedia).then(function(data) {
-					var finalMedia = _.filter(_.flatten(data), function(m){
+					var finalMedia = _.filter(_.flatten(data), function(m) {
 						return m.url.length > baseUrl.length;
 					});
 					resolve(finalMedia);

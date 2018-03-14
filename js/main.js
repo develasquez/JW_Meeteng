@@ -10,6 +10,9 @@ var main = {
         Media.getCurrentWeek().then(function(thisWeek) {
             currentWeek = thisWeek.name;
             main.setCurrentWeek();
+            Media.getWatchtower(thisWeek).then(function(media) {
+                main.getWatchtowerMedia(media);
+            });
         });
         main.getWeeks();
         main.setEvents();
@@ -25,6 +28,13 @@ var main = {
         window.onresize = function(event) {
             $("#songs").height($(".content").height());
         };
+        $(".findSong input").on("keyup",function(evt){
+            $("#songs li").show();
+            if($(this).val().length > 0){
+                $("#songs li:not(:contains('"+ $(this).val() +"'))").hide();    
+            }
+            
+        })
     },
     getWeeks: function() {
         monomer.showLoading();
@@ -91,9 +101,19 @@ var main = {
             });
         });
     },
+    getWatchtowerMedia: function(data) {
+        monomer.showLoading();
+        $(".wTitle").text(currentWeek.wName);
+        $(".wMediaList").html("");
+        $.each(data, function(i, e) {
+            $(".wMediaList").append($(list(e)).data("media", e).on("click", function(evt) {
+                electron.ipcRenderer.send("media", $(this).data("media"));
+            }));
+        });
+
+    },
     getSongs: function() {
         Media.getSongs().then(function(data) {
-            $("#songs").html("");
             $.each(data, function(i, e) {
                 $("#songs").append($(song(e)).data("media", e).on("click", function(evt) {
                     electron.ipcRenderer.send("media", $(this).data("media"));
